@@ -17,12 +17,16 @@ let isPlaying = false;
 let myFont;
 let currentIndex = 0;
 
+let maskImg;
+let pg;
+
 function preload() {
     myFont = loadFont('assets/Roboto.ttf');
     // for (let i = 0; i < 12; i++) {
     //     gifs[i] = loadImage("assets/" +  i + ".gif");
     // }
     gifs[0] = loadImage("assets/" +  6 + ".gif");
+    maskImg = loadImage("assets/mask2.png");
     // video.hide();
 }
 
@@ -45,6 +49,9 @@ function setup() {
     for (const gif of gifs) {
         gif.play();
     }
+    maskImg.resize(width, height);
+    gifs[0].resize(width, height);
+    pg = createGraphics(maskImg.width, maskImg.height);
     noCursor();
 }
 
@@ -59,9 +66,12 @@ function draw() {
     // quadMap.image(gif, 0, 0);
     // quadMap.noFill();
 
-    translate(-width/2, -height/2)
-    image(gifs[currentIndex], 0, 0, width, height);
+  
 
+    translate(-width/2, -height/2);
+    // gifs[currentIndex].mask(maskImg);
+    image(gifs[currentIndex], 0, 0, width, height);
+    image(maskImg, 0, 0, width, height);
     // change();
 }
 
